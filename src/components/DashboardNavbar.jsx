@@ -3,7 +3,7 @@ import { BellDot } from "lucide-react";
 
 const DashboardNavbar = () => {
   return (
-    <nav className="bg-white px-10 pt-10 flex justify-end items-center gap-4">
+    <nav className="bg-white px-10 pt-5 sm:pt-10 flex justify-end items-center gap-4">
       <BellDot className="text-teal-500 cursor-pointer" />
 
       {/* User Profile */}

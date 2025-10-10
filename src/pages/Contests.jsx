@@ -39,15 +39,17 @@ const Contests = () => {
   );
 
   return (
-    <div className="min-h-screen p-8">
+    <div className="min-h-screen sm:p-8">
       {/* Header Section */}
       <div className="mb-4 ">
-        <div className="flex justify-between items-center ">
-          <h1 className="text-4xl font-bold text-gray-900 ">Contests</h1>
+        <div className="flex justify-between items-center mb-6">
+          <h1 className="text-2xl sm:text-4xl font-bold text-gray-900">
+            Contests
+          </h1>
 
-          <button className="flex gap-1 items-center w-ful bg-[#12bab0] text-white py-2 px-4 rounded-full font-medium mb-8 hover:bg-[#149e94] transition-colors duration-200 shadow-md hover:shadow-lg">
+          <button className="flex gap-1 items-center bg-[#12bab0] text-white py-1 px-3 sm:py-2 sm:px-4 rounded-full font-medium hover:bg-[#149e94] transition-colors duration-200 shadow-md hover:shadow-lg">
             <Plus className="w-5" />
-            <span>Create New Contest</span>
+            <span className="text-xs sm:text-sm">Create New Contest</span>
           </button>
         </div>
 
