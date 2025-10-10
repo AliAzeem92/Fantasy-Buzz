@@ -1,47 +1,57 @@
-// ContestsLayout.jsx
 import { Plus } from "lucide-react";
 import React, { useState } from "react";
+import contestImg from "../assets/contest.jpg";
 
 const Contests = () => {
   const [activeTab, setActiveTab] = useState("ongoing");
 
-  // Sample contest data
-  const contests = [
+  // Separate Data
+  const ongoingContests = [
     {
       id: 1,
-      title: "Contest 1",
-      date: "01.06.23",
+      title: "Summer Fantasy League",
+      date: "01.06.25",
       description:
-        "Lorem Ipsum dolores omit est Lorem ipsum dolores omit est Lorem ipsum dolores omit est Lorem ipsum dolores omit est Lorem ipsum dolores",
-      status: "ongoing",
+        "Join the ultimate summer fantasy contest and showcase your skills. Exciting rewards await the top performers!",
+      src: contestImg,
     },
     {
       id: 2,
-      title: "Contest 2",
-      date: "01.06.23",
+      title: "Cricket Challenge Cup",
+      date: "12.06.25",
       description:
-        "Lorem Ipsum dolores omit est Lorem ipsum dolores omit est Lorem ipsum dolores omit est Lorem ipsum dolores omit est Lorem ipsum dolores omit est Lorem ipsum dolores",
-      status: "ongoing",
-    },
-    {
-      id: 3,
-      title: "Contest 3",
-      date: "01.06.23",
-      description:
-        "Lorem Ipsum dolores omit est Lorem ipsum dolores omit est Lorem ipsum dolores omit est Lorem ipsum dolores omit est Lorem ipsum dolores omit est Lorem ipsum dolores omit est Lorem ipsum dolores",
-      status: "archived",
+        "Put your cricket knowledge to the test in our exclusive Challenge Cup! Compete against other players for big prizes.",
+      src: contestImg,
     },
   ];
 
-  // Filter contests based on active tab
-  const filteredContests = contests.filter(
-    (contest) => contest.status === activeTab
-  );
+  const archivedContests = [
+    {
+      id: 3,
+      title: "Winter Fantasy Battle",
+      date: "15.12.24",
+      description:
+        "Our most thrilling winter contest is now concluded. See who dominated the leaderboard!",
+      src: contestImg,
+    },
+    {
+      id: 4,
+      title: "Champions League Predictor",
+      date: "22.03.25",
+      description:
+        "This contest tested users’ football instincts! Check out archived results and stats.",
+      src: contestImg,
+    },
+  ];
+
+  // Choose dataset based on tab
+  const displayedContests =
+    activeTab === "ongoing" ? ongoingContests : archivedContests;
 
   return (
     <div className="min-h-screen sm:p-8">
       {/* Header Section */}
-      <div className="mb-4 ">
+      <div className="mb-4">
         <div className="flex justify-between items-center mb-6">
           <h1 className="text-2xl sm:text-4xl font-bold text-gray-900">
             Contests
@@ -58,7 +68,7 @@ const Contests = () => {
           <button
             className={`pb-3 px-1 text-xl ${
               activeTab === "ongoing"
-                ? "text-black/70 border-b-2 border-black font-bold "
+                ? "text-black/70 border-b-2 border-black font-bold"
                 : "text-gray-500 hover:text-gray-700"
             }`}
             onClick={() => setActiveTab("ongoing")}
@@ -68,7 +78,7 @@ const Contests = () => {
           <button
             className={`pb-3 px-1 text-xl ${
               activeTab === "archived"
-                ? "text-black/70 border-b-2 border-black font-bold "
+                ? "text-black/70 border-b-2 border-black font-bold"
                 : "text-gray-500 hover:text-gray-700"
             }`}
             onClick={() => setActiveTab("archived")}
@@ -80,38 +90,37 @@ const Contests = () => {
 
       {/* Contests Grid */}
       <div className="space-y-6">
-        {filteredContests.length > 0 ? (
-          filteredContests.map((contest) => (
+        {displayedContests.length > 0 ? (
+          displayedContests.map((contest) => (
             <div
               key={contest.id}
-              className="bg-[#f0f0f3] rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow duration-200"
+              className="flex flex-col sm:flex-row justify-between items-center bg-[#f0f0f3] rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow duration-200"
             >
-              {/* Contest Header */}
-              <div className="flex justify-between items-start mb-4">
-                <h3 className="text-xl font-semibold text-gray-900">
-                  {contest.title} | {contest.date}
-                </h3>
-                <span
-                  className={`text-xs font-medium px-2.5 py-1 rounded-full ${
-                    contest.status === "ongoing"
-                      ? "bg-green-100 text-green-800"
-                      : "bg-gray-100 text-gray-800"
-                  }`}
-                >
-                  {contest.status.charAt(0).toUpperCase() +
-                    contest.status.slice(1)}
-                </span>
+              <div className="p-6 w-full ">
+                <div className="flex justify-between items-start mb-4">
+                  <div className="flex items-center gap-2 ">
+                    <h3 className="text-xl font-semibold text-gray-900">
+                      {contest.title} |
+                    </h3>
+                    <h3 className="text-lg text-gray-900">{contest.date}</h3>
+                  </div>
+                </div>
+                <p className="text-gray-600 leading-relaxed mb-4">
+                  {contest.description}
+                </p>
+                <button className="text-blue-600 font-medium hover:text-blue-800 transition-colors duration-200 text-sm underline">
+                  See Details →
+                </button>
               </div>
 
-              {/* Contest Description */}
-              <p className="text-gray-600 leading-relaxed mb-4">
-                {contest.description}
-              </p>
-
-              {/* See Details Link */}
-              <button className="text-blue-600 font-medium hover:text-blue-800 transition-colors duration-200 text-sm">
-                See Details →
-              </button>
+              {/* Contest Image */}
+              <div className="overflow-hidden rounded-b-lg sm:rounded-r-lg ">
+                <img
+                  src={contest.src}
+                  alt={contest.title}
+                  className="w-full h-48 object-cover  border border-gray-300"
+                />
+              </div>
             </div>
           ))
         ) : (
