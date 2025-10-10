@@ -5,7 +5,7 @@ import { Outlet } from "react-router-dom";
 
 const DashboardLayout = ({ children }) => {
   return (
-    <div className="flex h-screen bg-white">
+    <div className="flex  bg-white">
       {/* Sidebar - 20% */}
       <Sidebar />
 

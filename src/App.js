@@ -19,6 +19,7 @@ import Contests from "./pages/Contests";
 
 // Layout
 import DashboardLayout from "./pages/DashboardLayout";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   return (
@@ -28,8 +29,14 @@ function App() {
         <Route path="/" element={<Auth />} />
 
         {/* Dashboard Layout with nested routes */}
-        <Route path="/dashboard" element={<DashboardLayout />}>
-          {/* ✅ Default redirect to /dashboard/contests */}
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <DashboardLayout />
+            </ProtectedRoute>
+          }
+        >
           <Route index element={<Navigate to="contests" replace />} />
 
           {/* Dashboard sub-routes */}

@@ -3,6 +3,11 @@ module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
+      colors: {
+        background: "#010B28",
+        green: "#12BAB0",
+        greenHover: "#0EA89F",
+      },
       keyframes: {
         fadeIn: {
           "0%": { opacity: 0 },

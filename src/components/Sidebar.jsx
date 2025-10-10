@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import { Plus, Menu, X } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import logo from "../assets/logo.jpg";
+import { useUser } from "../context/UserContext";
 
 const Sidebar = () => {
   const [activeItem, setActiveItem] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
+  const { user } = useUser();
 
   const menuItems = [
     { label: "Contests", path: "/dashboard/contests" },
@@ -27,20 +30,28 @@ const Sidebar = () => {
     setIsOpen(false); // Close sidebar when a menu item is clicked (on mobile)
   };
 
+  const handleLogoClick = () => {
+    if (user) {
+      navigate("/dashboard/contests");
+    } else {
+      navigate("/");
+    }
+  };
+
   return (
     <>
       {/* ====== Mobile Toggle Button (☰) ====== */}
       <button
         onClick={() => setIsOpen(true)}
-        className="md:hidden fixed top-4 left-4 z-50 bg-[#12bab0] text-white p-2 rounded-md shadow-md hover:bg-[#149e94] transition-colors"
+        className="md:hidden fixed top-4 left-4 z-50 bg-green text-white p-2 rounded-md shadow-md hover:bg-greenHover transition-colors"
       >
         <Menu size={24} />
       </button>
 
       {/* ====== Sidebar ====== */}
       <div
-        className={`fixed md:static top-0 left-0 h-full bg-[#020b2d] text-white shadow-lg p-6 flex flex-col transition-transform duration-300 ease-in-out z-40 
-        w-4/5 sm:w-2/5 md:w-[20%]
+        className={`fixed md:static top-0 left-0 min-h-screen bg-background text-white shadow-lg flex flex-col transition-transform duration-300 ease-in-out z-40 
+        w-4/5 sm:w-2/5 md:w-[254px]
         ${isOpen ? "translate-x-0" : "-translate-x-full"} 
         md:translate-x-0`}
       >
@@ -54,33 +65,34 @@ const Sidebar = () => {
 
         {/* Logo/Header */}
         <div className="flex flex-col -rotate-12 mt-2 ">
-          <a href="/" className="text-center">
-            <h1 className="text-xl sm:text-2xl font-extrabold tracking-wide ">
-              Fantasy Buzz
-            </h1>
-            <p className="text-sm text-gray-400">© The Tech Buzz</p>
-          </a>
+          <button
+            onClick={handleLogoClick}
+            className="text-center mt-6 mx-6 focus:outline-none"
+          >
+            <img src={logo} alt="logo" />
+          </button>
         </div>
 
         {/* Create Contest Button */}
         <button
           onClick={() => handleNavigate("/dashboard/contests")}
-          className="flex gap-1 items-center w-fit mt-16 bg-[#12bab0] text-white py-2 px-4 rounded-full font-medium mb-8 hover:bg-[#149e94] transition-colors duration-200 shadow-md hover:shadow-lg"
+          className="flex gap-1 items-center mx-6 w-fit mt-10 bg-green text-white py-2 px-4 rounded-full font-medium mb-8 hover:bg-greenHover transition-colors duration-200 shadow-md hover:shadow-lg"
         >
           <Plus className="w-5" />
-          <span>Create New Contest</span>
+          <span className="text-xs ">Create New Contest</span>
         </button>
 
         {/* Navigation Menu */}
-        <nav className="flex-1 border-t border-gray-300 mt-4 pt-4 overflow-y-auto">
-          <ul className="space-y-2">
+        <nav className="flex-1 border-gray-300 overflow-y-auto">
+          <hr className="my-6 mx-6 border-gray-600" />
+          <ul className="space-y-2 ml-6 ">
             {menuItems.map((item, index) => (
               <li key={index}>
                 <button
                   onClick={() => handleNavigate(item.path)}
-                  className={`w-full text-left py-1 rounded-lg transition-all duration-200 font-medium ${
+                  className={`w-full text-left py-1 transition-all duration-200 ${
                     activeItem === item.path
-                      ? "text-white"
+                      ? "text-white font-medium border-r-4 border-green "
                       : "text-white/50 hover:text-white"
                   }`}
                 >
@@ -90,16 +102,16 @@ const Sidebar = () => {
             ))}
           </ul>
 
-          <hr className="my-6 border-gray-600" />
+          <hr className="my-6 mx-6 border-gray-600" />
 
-          <ul className="space-y-2">
+          <ul className="space-y-2 ml-6">
             {settingsItems.map((item, index) => (
               <li key={index}>
                 <button
                   onClick={() => handleNavigate(item.path)}
-                  className={`w-full text-left py-1 rounded-lg transition-all duration-200 font-medium ${
+                  className={`w-full text-left py-1 transition-all duration-200 ${
                     activeItem === item.path
-                      ? "text-white"
+                      ? "text-white font-medium border-r-4 border-green "
                       : "text-white/50 hover:text-white"
                   }`}
                 >
