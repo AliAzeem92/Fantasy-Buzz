@@ -63,7 +63,7 @@ const Sidebar = () => {
         {/* Create Contest Button */}
         <button
           onClick={() => handleNavigate("/dashboard/contests")}
-          className="flex gap-1 items-center w-fit mt-28 bg-[#12bab0] text-white py-2 px-4 rounded-full font-medium mb-8 hover:bg-[#149e94] transition-colors duration-200 shadow-md hover:shadow-lg"
+          className="flex gap-1 items-center w-fit mt-16 bg-[#12bab0] text-white py-2 px-4 rounded-full font-medium mb-8 hover:bg-[#149e94] transition-colors duration-200 shadow-md hover:shadow-lg"
         >
           <Plus className="w-5" />
           <span>Create New Contest</span>
