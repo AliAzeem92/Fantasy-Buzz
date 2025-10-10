@@ -13,11 +13,11 @@ function Auth() {
   const closeModal = () => setActiveModal(null);
 
   return (
-    <main className="min-h-screen bg-[#020b2d] flex flex-col justify-between text-white">
+    <main className="min-h-screen bg-[#020b2d] flex flex-col justify-between text-white overflow-hidden ">
       {/* Navbar */}
       <nav className="flex justify-between items-center p-6">
         <div className="flex flex-col">
-          <h1 className="text-2xl font-extrabold tracking-wide">
+          <h1 className="text-xl sm:text-2xl font-extrabold tracking-wide">
             Fantasy Buzz
           </h1>
           <p className="text-sm text-gray-400">© The Tech Buzz</p>
@@ -25,13 +25,13 @@ function Auth() {
         <div className="flex gap-2 ">
           <button
             onClick={() => navigate("/dashboard")}
-            className="border border-teal-400 text-teal-400 px-16 py-2 rounded-full hover:bg-teal-400 hover:text-white transition"
+            className="border border-teal-400 text-teal-400 px-2 sm:px-16 py-1 sm:py-2 rounded-full hover:bg-teal-400 hover:text-white transition"
           >
             Dashboard
           </button>
           <button
             onClick={() => setActiveModal("login")}
-            className="border border-teal-400 text-teal-400 px-16 py-2 rounded-full hover:bg-teal-400 hover:text-white transition"
+            className="border border-teal-400 text-teal-400 px-2 sm:px-16 py-1 sm:py-2 rounded-full hover:bg-teal-400 hover:text-white transition"
           >
             Login
           </button>
