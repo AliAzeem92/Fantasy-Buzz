@@ -53,11 +53,13 @@ const Sidebar = () => {
         </button>
 
         {/* Logo/Header */}
-        <div className="flex flex-col -rotate-12 text-center pt-3">
-          <h1 className="text-2xl font-extrabold tracking-wide text-white">
-            Fantasy Buzz
-          </h1>
-          <p className="text-sm text-gray-400">© The Tech Buzz</p>
+        <div className="flex flex-col -rotate-12 mt-2 ">
+          <a href="/" className="text-center">
+            <h1 className="text-xl sm:text-2xl font-extrabold tracking-wide ">
+              Fantasy Buzz
+            </h1>
+            <p className="text-sm text-gray-400">© The Tech Buzz</p>
+          </a>
         </div>
 
         {/* Create Contest Button */}

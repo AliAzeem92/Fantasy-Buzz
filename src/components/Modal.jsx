@@ -6,11 +6,11 @@ const Modal = ({ show, onClose, children }) => {
   return (
     <div
       onClick={onClose}
-      className="fixed inset-0 bg-black/60 flex justify-center items-center z-50"
+      className="fixed inset-0 bg-black/60 flex justify-center items-center z-50 animate-fadeIn"
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="bg-white text-black rounded-xl shadow-lg w-[90%] max-w-md p-8 relative"
+        className="bg-white text-black rounded-xl shadow-2xl w-[90%] max-w-md p-8 relative animate-scaleIn"
       >
         <button
           onClick={onClose}
