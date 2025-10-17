@@ -9,12 +9,11 @@ import logo from "../assets/logo.jpg";
 
 function Auth() {
   const [activeModal, setActiveModal] = useState(null);
-  const navigate = useNavigate();
 
   const closeModal = () => setActiveModal(null);
 
   return (
-    <main className="min-h-screen bg-background flex flex-col justify-between text-white overflow-hidden ">
+    <main className="min-h-screen bg-darkBlue flex flex-col justify-between text-white overflow-hidden ">
       {/* Navbar */}
       <nav className="flex justify-between items-center p-6">
         <div className="flex flex-col -rotate-12 ">

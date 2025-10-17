@@ -20,6 +20,7 @@ import Contests from "./pages/Contests";
 // Layout
 import DashboardLayout from "./pages/DashboardLayout";
 import ProtectedRoute from "./components/ProtectedRoute";
+import CreateContest from "./pages/CreateContest";
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
           <Route index element={<Navigate to="contests" replace />} />
 
           {/* Dashboard sub-routes */}
+          <Route path="create" element={<CreateContest />} />
           <Route path="contests" element={<Contests />} />
           <Route path="user-management" element={<UserManagement />} />
           <Route path="marketing-campaigns" element={<MarketingCampaigns />} />

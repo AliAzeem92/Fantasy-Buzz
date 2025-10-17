@@ -50,7 +50,7 @@ const Sidebar = () => {
 
       {/* ====== Sidebar ====== */}
       <div
-        className={`fixed md:static top-0 left-0 min-h-screen bg-background text-white shadow-lg flex flex-col transition-transform duration-300 ease-in-out z-40 
+        className={`fixed md:static top-0 left-0 min-h-screen bg-darkBlue text-white shadow-lg flex flex-col transition-transform duration-300 ease-in-out z-40 
         w-4/5 sm:w-2/5 md:w-[254px]
         ${isOpen ? "translate-x-0" : "-translate-x-full"} 
         md:translate-x-0`}
@@ -75,7 +75,7 @@ const Sidebar = () => {
 
         {/* Create Contest Button */}
         <button
-          onClick={() => handleNavigate("/dashboard/contests")}
+          onClick={() => handleNavigate("/dashboard/create")}
           className="flex gap-1 items-center mx-6 w-fit mt-10 bg-green text-white py-2 px-4 rounded-full font-medium mb-8 hover:bg-greenHover transition-colors duration-200 shadow-md hover:shadow-lg"
         >
           <Plus className="w-5" />
