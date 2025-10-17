@@ -294,20 +294,20 @@ const Contests = () => {
                   <img
                     src={contest.image}
                     alt={contest.name}
-                    className="w-64 h-40 object-cover rounded-r-lg border border-gray-300"
+                    className="sm:w-64 h-40 object-cover rounded-b-lg sm:rounded-r-lg border border-gray-300"
                   />
                 )}
               </div>
 
               {/* ✅ Only show questions if tab is "ongoing" */}
               {activeTab === "ongoing" && contest.questions?.length > 0 && (
-                <div className="space-y-4 mt-5 w-[60%] hover:shadow-md transition-shadow duration-200">
+                <div className="space-y-4 mt-5 sm:w-[60%] hover:shadow-md transition-shadow duration-200">
                   {contest.questions.map((question, qIndex) => (
                     <div
                       key={qIndex}
                       className="border-2 hover:border-[#8394d0] rounded-md p-4 bg-[#f0f0f3]"
                     >
-                      <div className="flex justify-between items-center mb-3 border-b-2 py-4">
+                      <div className="flex justify-between items-center mb-3 border-b-2 pb-2 sm:pb-0 sm:py-4">
                         <h4 className="text-base font-semibold text-gray-800">
                           QUESTION {qIndex + 1}/{contest.questions.length}
                         </h4>

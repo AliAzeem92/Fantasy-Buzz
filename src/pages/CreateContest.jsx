@@ -122,7 +122,7 @@ const CreateContest = () => {
       {/* Contest Details */}
       <div className="bg-white mb-6 max-w-3xl ">
         <div className="flex gap-4 mb-6 flex-col md:flex-row w-[100%] ">
-          <div className="bg-[#eff0f3] w-[30%] flex flex-col text-gray-500 items-center justify-center p-4 rounded-md relative">
+          <div className="bg-[#eff0f3] sm:w-[30%] flex flex-col text-gray-500 items-center justify-center p-4 rounded-md relative">
             <CloudUpload />
             <label className="block mb-1 font-medium underline cursor-pointer">
               Upload the Image
@@ -142,7 +142,7 @@ const CreateContest = () => {
             )}
           </div>
 
-          <div className="w-[70%] ">
+          <div className="sm:w-[70%] ">
             <div>
               <label className="block mb-1 font-medium">Contest Name</label>
               <input
@@ -221,7 +221,7 @@ const CreateContest = () => {
                 <input
                   type="text"
                   placeholder={`Option ${idx + 1}`}
-                  className="p-2 flex-1 bg-transparent border-b-2 border-gray-300 "
+                  className="p-2 w-[90%] sm:w-fit flex-1 bg-transparent border-b-2 border-gray-300 "
                   value={opt.text}
                   onChange={(e) =>
                     handleOptionChange(q.id, opt.id, e.target.value)
@@ -242,40 +242,41 @@ const CreateContest = () => {
             </button>
           </div>
 
-          <div className="flex flex-row gap-5 items-center ">
-            <span className="flex flex-col gap-8 ">
-              <label className="block mb-1 font-medium ">
-                Question Active Till:
-              </label>
-              <label className="block mb-1 font-medium ">Source:</label>
-            </span>
-            <span className="flex flex-col gap-6 ">
+          <div className="flex flex-col gap-5">
+            {/* Question Active Till */}
+            <div className="flex flex-col sm:flex-row sm:items-center gap-3">
+              <label className="font-medium w-40 ">Question Active Till:</label>
               <input
                 type="datetime-local"
-                className="border-2 p-2 rounded-full w-[100%] bg-transparent "
+                className="border-2 border-gray-300 p-2 rounded-full bg-transparent focus:outline-none focus:border-blue-500 transition"
                 value={q.activeTill}
                 onChange={(e) =>
                   handleQuestionChange(q.id, "activeTill", e.target.value)
                 }
               />
+            </div>
+
+            {/* Source */}
+            <div className="flex flex-col sm:flex-row sm:items-center gap-3">
+              <label className="font-medium w-40 ">Source:</label>
               <input
                 type="text"
                 placeholder="Source link"
-                className="border-b-2 bg-transparent "
+                className="border-b-2 border-gray-300 bg-transparent p-2 focus:outline-none focus:border-blue-500 transition"
                 value={q.source}
                 onChange={(e) =>
                   handleQuestionChange(q.id, "source", e.target.value)
                 }
               />
-            </span>
+            </div>
           </div>
         </div>
       ))}
 
-      <div className="flex flex-row items-center justify-between max-w-3xl mb-10 ">
+      <div className="flex flex-row items-center justify-between max-w-3xl sm:mb-10 ">
         <button
           onClick={addQuestion}
-          className="text-green text-xl flex items-center gap-1"
+          className="text-green sm:text-xl flex items-center gap-1"
         >
           <span className="underline ">New Question</span>
           <Plus />
@@ -283,7 +284,7 @@ const CreateContest = () => {
 
         <button
           onClick={handleSubmit}
-          className="bg-green text-white text-xl px-10 rounded-full py-2 hover:bg-greenHover transition-colors duration-200 shadow-md hover:shadow-lg flex items-center gap-2 "
+          className="bg-green text-white sm:text-xl px-10 rounded-full py-2 hover:bg-greenHover transition-colors duration-200 shadow-md hover:shadow-lg flex items-center gap-2 "
         >
           Submit
         </button>
