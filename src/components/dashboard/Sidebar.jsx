@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Plus, Menu, X } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import logo from "../assets/logo.jpg";
-import { useUser } from "../context/UserContext";
+import logo from "../../assets/logo.jpg";
+import { useUser } from "../../context/UserContext";
 
 const Sidebar = () => {
   const [activeItem, setActiveItem] = useState(null);

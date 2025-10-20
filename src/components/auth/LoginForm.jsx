@@ -96,48 +96,48 @@
 // export default LoginForm;
 import React, { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
-import { useNavigate } from "react-router-dom";
-import { useUser } from "../context/UserContext";
 
-const LoginForm = ({ onForgotPassword }) => {
+const LoginForm = ({ onForgotPassword, onSignUp }) => {
   const [showPassword, setShowPassword] = useState(false);
-  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
-  const navigate = useNavigate();
-  const { setUser } = useUser();
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState("");
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
+    setLoading(true);
+    setMessage("");
 
-    const userData = {
-      username,
-      email,
-      role: "Admin",
-      remember: rememberMe,
-    };
+    try {
+      const response = await fetch("http://localhost:4000/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include", // ✅ For cookies
+        body: JSON.stringify({ email, password }),
+      });
 
-    setUser(userData);
-    navigate("/dashboard");
+      const data = await response.json();
+
+      if (response.ok) {
+        setMessage("✅ Login successful! Redirecting...");
+        setTimeout(() => {
+          window.location.href = "/dashboard/contests";
+        }, 1200);
+      } else {
+        setMessage(`❌ ${data.message}`);
+      }
+    } catch (error) {
+      setMessage("⚠️ Server not responding. Try again later.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <form onSubmit={handleLogin} className="max-w-md mx-auto mt-12">
       <h2 className="text-4xl font-bold mb-6 text-[#020b2d]">Login</h2>
-
-      {/* Username */}
-      <div className="mb-4">
-        <label className="block text-sm text-gray-700 mb-1">Username*</label>
-        <input
-          type="text"
-          placeholder="Enter your username"
-          className="w-full border border-gray-300 rounded-full px-4 py-2 focus:outline-none focus:ring-2 focus:ring-teal-400"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          required
-        />
-      </div>
 
       {/* Email */}
       <div className="mb-4">
@@ -158,7 +158,7 @@ const LoginForm = ({ onForgotPassword }) => {
         <input
           type={showPassword ? "text" : "password"}
           placeholder="Enter your password"
-          className="w-full border border-gray-300 rounded-full px-4 py-2 focus:outline-none focus:ring-2 focus:ring-teal-400"
+          className="w-full border border-gray-300 rounded-full px-4 py-2 pr-10 focus:outline-none focus:ring-2 focus:ring-teal-400"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
@@ -166,7 +166,7 @@ const LoginForm = ({ onForgotPassword }) => {
         <button
           type="button"
           onClick={() => setShowPassword(!showPassword)}
-          className="absolute right-4 top-8 text-gray-500 hover:text-teal-500"
+          className="absolute inset-y-0 right-3 top-6 flex items-center text-gray-500 hover:text-teal-500"
         >
           {showPassword ? <Eye /> : <EyeOff />}
         </button>
@@ -187,19 +187,36 @@ const LoginForm = ({ onForgotPassword }) => {
         <button
           type="button"
           onClick={onForgotPassword}
-          className="text-teal-500 hover:underline"
+          className="text-teal-500 hover:text-teal-600 font-medium hover:underline"
         >
-          Forgot My Password
+          Forgot Password?
         </button>
       </div>
 
       {/* Submit */}
       <button
         type="submit"
-        className="w-full bg-[#020b2d] text-white font-medium py-2 rounded-full hover:bg-[#041045] transition"
+        disabled={loading}
+        className="w-full bg-[#020b2d] text-white font-medium py-2 rounded-full hover:bg-[#041045] transition disabled:bg-gray-400"
       >
-        Login
+        {loading ? "Logging in..." : "Login"}
       </button>
+
+      {/* Feedback Message */}
+      {message && (
+        <p className="text-center text-sm mt-4 text-gray-700">{message}</p>
+      )}
+
+      {/* Switch to Signup */}
+      <p className="text-center text-sm mt-2 text-gray-600">
+        Don’t have an account?{" "}
+        <button
+          onClick={onSignUp}
+          className="text-teal-500 hover:text-teal-600 hover:underline font-medium"
+        >
+          Sign up
+        </button>
+      </p>
     </form>
   );
 };

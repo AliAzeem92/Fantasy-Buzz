@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import Modal from "../components/Modal";
-import LoginForm from "../components/LoginForm";
-import ForgotPassword from "../components/ForgotPassword";
-import PasswordResetRequest from "../components/PasswordResetRequest";
-import ResetYourPassword from "../components/ResetPassword";
-import { useNavigate } from "react-router-dom";
+import LoginForm from "../components/auth/LoginForm";
+import ForgotPassword from "../components/auth/ForgotPassword";
+import PasswordResetRequest from "../components/auth/PasswordResetRequest";
+import ResetYourPassword from "../components/auth/ResetPassword";
 import logo from "../assets/logo.jpg";
+import SignupForm from "../components/auth/SignupForm";
+import Verify from "../components/auth/Verify";
 
 function Auth() {
   const [activeModal, setActiveModal] = useState(null);
@@ -50,7 +51,17 @@ function Auth() {
       {/* Reusable Modal */}
       <Modal show={!!activeModal} onClose={closeModal}>
         {activeModal === "login" && (
-          <LoginForm onForgotPassword={() => setActiveModal("forgot")} />
+          <LoginForm
+            onForgotPassword={() => setActiveModal("forgot")}
+            onSignUp={() => setActiveModal("signup")}
+          />
+        )}
+        {activeModal === "signup" && (
+          <SignupForm
+            onClose={closeModal}
+            onSwitchToLogin={() => setActiveModal("login")}
+            onSwitchToVerify={() => setActiveModal("verify")}
+          />
         )}
         {activeModal === "forgot" && (
           <ForgotPassword
@@ -66,6 +77,13 @@ function Auth() {
         )}
         {activeModal === "resetYourPassword" && (
           <ResetYourPassword onBack={() => setActiveModal("login")} />
+        )}
+        {activeModal === "verify" && (
+          <Verify
+            onClose={closeModal}
+            onBack={() => setActiveModal("login")}
+            onSwitchToLogin={() => setActiveModal("login")}
+          />
         )}
       </Modal>
     </main>
