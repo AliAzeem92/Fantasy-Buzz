@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import Modal from "../components/Modal";
 import LoginForm from "../components/auth/LoginForm";
-import ForgotPassword from "../components/auth/ForgotPassword";
-import PasswordResetRequest from "../components/auth/PasswordResetRequest";
-import ResetYourPassword from "../components/auth/ResetPassword";
 import logo from "../assets/logo.jpg";
 import SignupForm from "../components/auth/SignupForm";
 import Verify from "../components/auth/Verify";
+import ForgotPassword from "../components/auth/ForgotPassword";
+import PasswordResetOTP from "../components/auth/PasswordResetOTP";
+import SetNewPassword from "../components/auth/SetNewPassword";
 
 function Auth() {
   const [activeModal, setActiveModal] = useState(null);
@@ -65,18 +65,18 @@ function Auth() {
         )}
         {activeModal === "forgot" && (
           <ForgotPassword
-            onSendResetLink={() => setActiveModal("passwordResetRequest")}
+            onSendResetLink={() => setActiveModal("passwordResetOTP")}
             onBack={() => setActiveModal("login")}
           />
         )}
-        {activeModal === "passwordResetRequest" && (
-          <PasswordResetRequest
-            onResetYourPassword={() => setActiveModal("resetYourPassword")}
+        {activeModal === "passwordResetOTP" && (
+          <PasswordResetOTP
+            onResetYourPassword={() => setActiveModal("resetNewPassword")}
             onBack={() => setActiveModal("login")}
           />
         )}
-        {activeModal === "resetYourPassword" && (
-          <ResetYourPassword onBack={() => setActiveModal("login")} />
+        {activeModal === "resetNewPassword" && (
+          <SetNewPassword onBack={() => setActiveModal("login")} />
         )}
         {activeModal === "verify" && (
           <Verify

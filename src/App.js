@@ -21,10 +21,12 @@ import Contests from "./pages/Contests";
 import DashboardLayout from "./pages/DashboardLayout";
 import ProtectedRoute from "./components/ProtectedRoute";
 import CreateContest from "./pages/CreateContest";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   return (
     <Router>
+      <Toaster position="top-right" />
       <Routes>
         {/* Public route */}
         <Route path="/" element={<Auth />} />

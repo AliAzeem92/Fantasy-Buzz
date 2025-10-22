@@ -2,13 +2,11 @@ import React, { useState } from "react";
 import { Plus, Menu, X } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import logo from "../../assets/logo.jpg";
-import { useUser } from "../../context/UserContext";
 
 const Sidebar = () => {
   const [activeItem, setActiveItem] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
-  const { user } = useUser();
 
   const menuItems = [
     { label: "Contests", path: "/dashboard/contests" },
@@ -27,15 +25,7 @@ const Sidebar = () => {
   const handleNavigate = (path) => {
     setActiveItem(path);
     navigate(path);
-    setIsOpen(false); // Close sidebar when a menu item is clicked (on mobile)
-  };
-
-  const handleLogoClick = () => {
-    if (user) {
-      navigate("/dashboard/contests");
-    } else {
-      navigate("/");
-    }
+    setIsOpen(false);
   };
 
   return (
@@ -65,10 +55,7 @@ const Sidebar = () => {
 
         {/* Logo/Header */}
         <div className="flex flex-col -rotate-12 mt-2 ">
-          <button
-            onClick={handleLogoClick}
-            className="text-center mt-6 mx-6 focus:outline-none"
-          >
+          <button className="text-center mt-6 mx-6 focus:outline-none">
             <img src={logo} alt="logo" />
           </button>
         </div>

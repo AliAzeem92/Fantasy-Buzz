@@ -1,17 +1,17 @@
 import React from "react";
-// import Sidebar from "../components/dashboard/Sidebar";
-// import DashboardNavbar from "../components/dashboard/DashboardNavbar";
+import Sidebar from "../components/dashboard/Sidebar";
+import DashboardNavbar from "../components/dashboard/DashboardNavbar";
 import { Outlet } from "react-router-dom";
 
 const DashboardLayout = ({ children }) => {
   return (
     <div className="flex  bg-white">
       {/* Sidebar - 20% */}
-      {/* <Sidebar /> */}
+      <Sidebar />
 
       {/* Main content - 80% */}
       <div className="flex flex-col w-full ">
-        {/* <DashboardNavbar /> */}
+        <DashboardNavbar />
         <main className="flex-1 p-6 overflow-y-auto">
           {children}
           <Outlet />

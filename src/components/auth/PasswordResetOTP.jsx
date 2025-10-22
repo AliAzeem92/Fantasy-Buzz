@@ -2,31 +2,32 @@ import { MoveLeft } from "lucide-react";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 
-const ForgotPassword = ({ onSendResetLink, onBack }) => {
-  const [email, setEmail] = useState("");
+const VerifyOTP = ({ onResetYourPassword, onBack }) => {
+  const [otp, setOtp] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const handleSendOTP = async (e) => {
+  const handleVerify = async (e) => {
     e.preventDefault();
     setLoading(true);
+    const email = localStorage.getItem("resetEmail");
 
     try {
       const res = await fetch(
-        `${process.env.REACT_APP_API_URL}/api/auth/send-reset-otp`,
+        `${process.env.REACT_APP_API_URL}/api/auth/verify-reset-otp`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email }),
+          body: JSON.stringify({ email, otp }),
         }
       );
       const data = await res.json();
 
       if (data.success) {
-        toast.success("OTP sent to your email!");
-        localStorage.setItem("resetEmail", email);
-        onSendResetLink(); // move to next modal step
+        toast.success("OTP verified!");
+        localStorage.setItem("resetToken", data.resetToken);
+        onResetYourPassword(); // move to new password modal
       } else {
-        toast.error(data.message || "Failed to send OTP");
+        toast.error(data.message || "Invalid OTP");
       }
     } catch {
       toast.error("Something went wrong!");
@@ -37,16 +38,14 @@ const ForgotPassword = ({ onSendResetLink, onBack }) => {
 
   return (
     <div className="p-4">
-      <h2 className="text-4xl font-bold mb-6 text-darkBlue ">
-        Forgot Password
-      </h2>
-      <form onSubmit={handleSendOTP} className="flex flex-col ">
-        <label className="block text-sm text-gray-700 mb-1">Email*</label>
+      <h2 className="text-4xl font-bold mb-6 text-darkBlue ">Verify OTP</h2>
+      <form onSubmit={handleVerify} className="flex flex-col ">
+        <label className="block text-sm text-gray-700 mb-1">OTP*</label>
         <input
-          type="email"
-          placeholder="Enter your email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          type="text"
+          placeholder="Enter OTP"
+          value={otp}
+          onChange={(e) => setOtp(e.target.value)}
           required
           className="w-full border border-gray-300 rounded-full px-4 py-2 focus:outline-none focus:ring-2 focus:ring-teal-400"
         />
@@ -55,7 +54,7 @@ const ForgotPassword = ({ onSendResetLink, onBack }) => {
           disabled={loading}
           className="w-full mt-5 bg-darkBlue text-white font-medium py-2 rounded-full hover:bg-[#041045] transition disabled:bg-gray-400"
         >
-          {loading ? "Sending..." : "Send OTP"}
+          {loading ? "Verifying..." : "Verify OTP"}
         </button>
       </form>
       <button
@@ -72,4 +71,4 @@ const ForgotPassword = ({ onSendResetLink, onBack }) => {
   );
 };
 
-export default ForgotPassword;
+export default VerifyOTP;
