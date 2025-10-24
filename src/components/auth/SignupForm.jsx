@@ -31,7 +31,7 @@ const SignupForm = ({ onSwitchToLogin, onSwitchToVerify }) => {
       );
 
       const data = await response.json();
-
+      console.log(data);
       if (response.ok) {
         toast.success(data.message);
         setFormData({ name: "", email: "", password: "" });

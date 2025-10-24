@@ -7,6 +7,7 @@ import Verify from "../components/auth/Verify";
 import ForgotPassword from "../components/auth/ForgotPassword";
 import PasswordResetOTP from "../components/auth/PasswordResetOTP";
 import SetNewPassword from "../components/auth/SetNewPassword";
+import GoogleAuthButton from "../components/auth/GoogleAuthButton";
 
 function Auth() {
   const [activeModal, setActiveModal] = useState(null);
@@ -46,6 +47,7 @@ function Auth() {
         >
           Login
         </button>
+        <GoogleAuthButton />
       </div>
 
       {/* Reusable Modal */}
