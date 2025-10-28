@@ -114,9 +114,11 @@ const Verify = ({ onClose, onBack, onSwitchToLogin }) => {
       );
 
       if (res.data.success) {
-        toast.success("Email verified successfully!");
-        onClose();
-        onSwitchToLogin(); // ✅ goes to login popup
+        toast.success("Email verified successfully! Redirecting to dashboard...");
+        // Reload page to refresh auth context
+        setTimeout(() => {
+          window.location.reload();
+        }, 1500);
       } else {
         toast.error(res.data.message || "Invalid OTP");
       }

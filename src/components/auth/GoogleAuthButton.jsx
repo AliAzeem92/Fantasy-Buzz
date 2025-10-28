@@ -1,12 +1,9 @@
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import toast from "react-hot-toast";
 import { GoogleLogin } from "@react-oauth/google";
 
 const GoogleAuthButton = () => {
-  const navigate = useNavigate();
-
   const handleSuccess = async (response) => {
     try {
       const decoded = jwtDecode(response.credential);
@@ -17,11 +14,12 @@ const GoogleAuthButton = () => {
         { token: response.credential },
         { withCredentials: true }
       );
-      console.log(`${process.env.REACT_APP_API_URL}/api/auth/google-login`);
 
       if (backendRes.data.success) {
         toast.success(`Welcome ${decoded.name}`);
-        navigate("/dashboard/contests");
+        console.log(`${decoded.name} logged in via Google`);
+        // Force complete page reload to update auth state
+        window.location.href = "/dashboard/contests";
       } else {
         toast.error("Login failed on server.");
       }

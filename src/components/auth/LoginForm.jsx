@@ -28,9 +28,8 @@ const LoginForm = ({ onForgotPassword, onSignUp }) => {
 
       if (response.ok) {
         toast.success(data.message);
-        setTimeout(() => {
-          window.location.href = "/dashboard/contests";
-        }, 1200);
+        // Force page reload to update auth state
+        window.location.href = "/dashboard/contests";
       } else {
         toast.error(data.message);
       }

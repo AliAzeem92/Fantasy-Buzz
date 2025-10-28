@@ -1,22 +1,25 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
 
 const LogoutButton = () => {
-  const navigate = useNavigate();
-
   const handleLogout = async () => {
     try {
-      const res = await fetch("http://localhost:4000/api/auth/logout", {
-        method: "POST",
-        credentials: "include",
-      });
+      const res = await fetch(
+        `${
+          process.env.REACT_APP_API_URL || "http://localhost:4000"
+        }/api/auth/logout`,
+        {
+          method: "POST",
+          credentials: "include",
+        }
+      );
 
       const data = await res.json();
 
       if (res.ok) {
         toast.success(data.message);
-        navigate("/");
+        // Force complete page reload and redirect to home
+        window.location.href = "/";
       } else {
         toast.error(data.message || "Logout failed!");
       }

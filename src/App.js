@@ -69,6 +69,7 @@ import {
 
 // Pages
 import Auth from "./pages/Auth";
+import VerifyEmail from "./pages/VerifyEmail";
 import UserManagement from "./pages/UserManagement";
 import MarketingCampaigns from "./pages/MarketingCampaigns";
 import Leadenboard from "./pages/Leadenboard";
@@ -79,9 +80,11 @@ import FeedbackSupport from "./pages/FeedbackSupport";
 import Contests from "./pages/Contests";
 import CreateContest from "./pages/CreateContest";
 
-// Layout
+// Layout & Guards
 import DashboardLayout from "./pages/DashboardLayout";
-import ProtectedRoute from "./components/ProtectedRoute";
+import AuthGuard from "./components/AuthGuard";
+import PublicRoute from "./components/PublicRoute";
+import RouteGuard from "./components/RouteGuard";
 import { Toaster } from "react-hot-toast";
 
 // Route configuration for better maintainability
@@ -112,7 +115,8 @@ const routes = [
 function App() {
   return (
     <Router>
-      <Toaster
+      <RouteGuard>
+        <Toaster
         position="top-right"
         toastOptions={{
           duration: 4000,
@@ -137,36 +141,44 @@ function App() {
         }}
       />
       <Routes>
-        {/* Public route */}
-        <Route path="/" element={<Auth />} />
-
-        {/* Redirect from /login to root */}
+        {/* Public routes - only accessible when NOT authenticated */}
+        <Route path="/" element={
+          <PublicRoute>
+            <Auth />
+          </PublicRoute>
+        } />
         <Route path="/login" element={<Navigate to="/" replace />} />
+        <Route path="/signup" element={<Navigate to="/" replace />} />
 
-        {/* Dashboard Layout with nested routes */}
-        <Route
-          path="/dashboard"
-          element={
-            <ProtectedRoute>
-              <DashboardLayout />
-            </ProtectedRoute>
-          }
-        >
+        {/* Email verification route - for unverified users */}
+        <Route path="/verify-email" element={
+          <AuthGuard requireVerification={false}>
+            <VerifyEmail />
+          </AuthGuard>
+        } />
+
+        {/* Protected dashboard routes - requires authentication + verification */}
+        <Route path="/dashboard" element={
+          <AuthGuard>
+            <DashboardLayout />
+          </AuthGuard>
+        }>
           {/* Default dashboard route */}
           <Route index element={<Navigate to="contests" replace />} />
 
-          {/* Map through routes configuration */}
+          {/* Protected sub-routes */}
           {routes.map((route) => (
             <Route key={route.path} path={route.path} element={route.element} />
           ))}
 
-          {/* Catch all route for dashboard - redirect to contests */}
+          {/* Catch all route for dashboard */}
           <Route path="*" element={<Navigate to="contests" replace />} />
         </Route>
 
-        {/* Catch all route - redirect to home */}
+        {/* Catch all route - redirect based on auth status */}
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
+      </RouteGuard>
     </Router>
   );
 }

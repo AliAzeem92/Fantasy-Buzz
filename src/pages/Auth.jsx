@@ -8,6 +8,7 @@ import ForgotPassword from "../components/auth/ForgotPassword";
 import PasswordResetOTP from "../components/auth/PasswordResetOTP";
 import SetNewPassword from "../components/auth/SetNewPassword";
 import GoogleAuthButton from "../components/auth/GoogleAuthButton";
+import FacebookLoginButton from "../components/auth/FacebookLoginButton";
 
 function Auth() {
   const [activeModal, setActiveModal] = useState(null);
@@ -48,6 +49,7 @@ function Auth() {
           Login
         </button>
         <GoogleAuthButton />
+        <FacebookLoginButton />
       </div>
 
       {/* Reusable Modal */}
