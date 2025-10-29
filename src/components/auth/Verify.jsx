@@ -114,7 +114,9 @@ const Verify = ({ onClose, onBack, onSwitchToLogin }) => {
       );
 
       if (res.data.success) {
-        toast.success("Email verified successfully! Redirecting to dashboard...");
+        toast.success(
+          "Email verified successfully! Redirecting to dashboard..."
+        );
         // Reload page to refresh auth context
         setTimeout(() => {
           window.location.reload();
@@ -140,6 +142,7 @@ const Verify = ({ onClose, onBack, onSwitchToLogin }) => {
       toast.success(res.data.message);
     } catch (error) {
       toast.error(error.response?.data?.message || "Failed to send OTP");
+      console.error("Server error: ", error);
     } finally {
       setResendLoading(false);
     }

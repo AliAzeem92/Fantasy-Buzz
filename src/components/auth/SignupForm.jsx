@@ -45,6 +45,7 @@ const SignupForm = ({ onSwitchToLogin, onSwitchToVerify }) => {
       }
     } catch (error) {
       toast.error("⚠️ Server not responding. Try again later.");
+      console.error("Server error: ", error);
     } finally {
       setLoading(false);
     }

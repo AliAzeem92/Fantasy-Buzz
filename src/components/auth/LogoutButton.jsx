@@ -25,6 +25,7 @@ const LogoutButton = () => {
       }
     } catch (error) {
       toast.error("Something went wrong during logout!");
+      console.error("Server error: ", error);
     }
   };
 

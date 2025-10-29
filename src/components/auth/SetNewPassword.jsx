@@ -46,6 +46,7 @@ const SetNewPassword = ({ onBack }) => {
       }
     } catch {
       toast.error("Something went wrong!");
+      console.error("Server error: ", error);
     } finally {
       setLoading(false);
     }
