@@ -29,9 +29,9 @@ const VerifyOTP = ({ onResetYourPassword, onBack }) => {
       } else {
         toast.error(data.message || "Invalid OTP");
       }
-    } catch {
+    } catch (error) {
       toast.error("Something went wrong!");
-      console.error("Server error: ", error);
+      console.error("Server error:", error);
     } finally {
       setLoading(false);
     }

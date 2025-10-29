@@ -28,7 +28,7 @@ const ForgotPassword = ({ onSendResetLink, onBack }) => {
       } else {
         toast.error(data.message || "Failed to send OTP");
       }
-    } catch {
+    } catch (error) {
       toast.error("Something went wrong!");
       console.error("Server error: ", error);
     } finally {

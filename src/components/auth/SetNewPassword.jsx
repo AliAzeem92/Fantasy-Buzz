@@ -44,7 +44,7 @@ const SetNewPassword = ({ onBack }) => {
       } else {
         toast.error(data.message || "Failed to reset password");
       }
-    } catch {
+    } catch (error) {
       toast.error("Something went wrong!");
       console.error("Server error: ", error);
     } finally {
